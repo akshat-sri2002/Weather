@@ -9,7 +9,14 @@ function myfunc(){
     fetch(url)
     .then(response => response.json())
     .then(data => {
+
         // console.log(data);
+        if(data.message=='city not found'){
+            // city.innerHTML=`<span>${data.message}</span>`
+            city.innerHTML=`<span>City Not Found</span>`
+
+            return
+        }
         city.innerHTML=`<span>${data.name}</span>`
         temp.innerHTML=`<span>${Math.round(data.main.temp-273)}</span><span>&degC</span>`;
         var weatherType=data.weather[0].main;
@@ -31,5 +38,6 @@ function myfunc(){
         }else if(weatherType=='snow'){
             icon.innerHTML=`<i class="bi bi-snow2"></i>`;
         }
+        document.getElementById('cityInput').value="";
     });
 }
